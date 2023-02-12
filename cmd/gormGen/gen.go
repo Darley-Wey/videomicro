@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/ClubWeGo/videomicro/utils"
 	"log"
 
 	"github.com/ClubWeGo/videomicro/dal/model"
@@ -11,13 +12,13 @@ import (
 )
 
 func main() {
-
+	utils.RegisterSSH()
 	g := gen.NewGenerator(gen.Config{
 		OutPath: "../../dal/query",
 		Mode:    gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface,
 	})
 
-	dsn := "tk:123456@tcp(127.0.0.1:3306)/simpletk?charset=utf8&parseTime=True&loc=Local"
+	dsn := "root:yutian@mysql+ssh(127.0.0.1:3306)/simpletk?charset=utf8&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn))
 	if err != nil {
 		log.Fatal(err)
